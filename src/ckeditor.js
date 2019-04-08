@@ -28,9 +28,19 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+//added:
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 
-// Plugins to include in the build.
+class SimpleEditor extends ClassicEditorBase {}
+class ClassicEditor extends ClassicEditorBase {}
+
+// Plugins to include in the build for ClassicEditor
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
@@ -52,22 +62,57 @@ ClassicEditor.builtinPlugins = [
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+
+	Alignment,
+  Highlight,
+  Font,
+  Underline,
+  Strikethrough,
+  Subscript,
+  Superscript
+];
+// Plugins to include in the build for SimpleEditor
+SimpleEditor.builtinPlugins = [
+	Essentials,
+	Autoformat,
+	Bold,
+	Italic,
+	BlockQuote,
+	Link,
+	List,
+	Paragraph,
+
+  Underline,
+  Strikethrough,
+  Subscript,
+  Superscript
 ];
 
-// Editor configuration.
+// ClassicEditor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
 			'heading',
 			'|',
+      'alignment',
+      'fontSize',
+      'fontFamily',
+      'highlight',
+      '|',
 			'bold',
 			'italic',
+      'underline',
+      'strikethrough',
+      'superscript',
+      'subscript',
+      '|',
 			'link',
 			'bulletedList',
 			'numberedList',
-			'imageUpload',
 			'blockQuote',
+      '|',
+			'imageUpload',
 			'insertTable',
 			'mediaEmbed',
 			'undo',
@@ -92,3 +137,30 @@ ClassicEditor.defaultConfig = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
+
+
+
+// SimpleEditor configuration.
+SimpleEditor.defaultConfig = {
+	toolbar: {
+		items: [
+			'bold',
+			'italic',
+      'underline',
+      'strikethrough',
+      'superscript',
+      'subscript',
+      '|',
+			'link',
+			'bulletedList',
+			'numberedList',
+			'blockQuote'
+		]
+	},
+	// This value must be kept in sync with the language defined in webpack.config.js.
+	language: 'en'
+};
+
+export default {
+  SimpleEditor, ClassicEditor
+}
